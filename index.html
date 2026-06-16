@@ -13,6 +13,232 @@
 </head>
 <body>
 
+  <!-- ── SCROLL SEQUENCE ───────────────────────────────── -->
+  <section class="scroll-sequence" id="scroll-sequence">
+    <div class="scroll-sequence__track">
+      <canvas class="scroll-sequence__canvas" id="seqCanvas" aria-hidden="true"></canvas>
+
+      <!-- Loading spinner -->
+      <div class="seq-loader" id="seqLoader">
+        <div class="seq-loader__ring"></div>
+      </div>
+
+      <!-- Overlay text layers -->
+      <div class="seq-overlay" id="seqOverlay">
+        <div class="seq-text seq-text--center" id="seqText0">
+          Every point of contact.<br />Every conversion.
+        </div>
+        <div class="seq-text seq-text--left" id="seqText1">
+          Brand strategy<br /><em>that defines you.</em>
+        </div>
+        <div class="seq-text seq-text--right" id="seqText2">
+          Performance marketing<br /><em>that scales you.</em>
+        </div>
+        <div class="seq-text seq-text--center seq-text--cta" id="seqText3">
+          <span>Let's build something global.</span>
+          <a href="https://wa.me/4917628554554?text=Hi%20Matthieu%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20Quaestus%20Global%20Solutions."
+            target="_blank" rel="noopener noreferrer" class="seq-cta-btn">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 0C4.477 0 0 4.373 0 9.76c0 1.71.459 3.312 1.26 4.695L0 20l5.696-1.225A10.06 10.06 0 0010 19.52c5.523 0 10-4.373 10-9.76C20 4.373 15.523 0 10 0zm5.193 13.82c-.22.603-1.293 1.153-1.773 1.217-.48.063-.48.397-3.02-.618-2.54-1.016-4.08-3.53-4.203-3.694-.123-.164-1-1.3-1-2.483 0-1.183.636-1.77.862-2.01.226-.24.494-.3.659-.3h.494c.164 0 .385-.06.603.45.22.508.74 1.776.8 1.905.06.13.1.28.02.45-.08.17-.12.274-.24.42-.123.147-.257.328-.37.44-.123.123-.25.258-.108.505.144.247.638 1.036 1.37 1.677.941.826 1.737 1.08 1.983 1.203.246.123.39.103.535-.06.144-.165.617-.713.78-.958.165-.246.33-.206.555-.124.226.082 1.43.668 1.676.79.246.123.41.185.47.288.06.103.06.6-.16 1.202z"/></svg>
+            Start a conversation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .scroll-sequence {
+      height: 400vh;
+      background: #080c12;
+    }
+    .scroll-sequence__track {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      background: #080c12;
+    }
+    .scroll-sequence__canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .seq-loader {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      background: #080c12;
+      transition: opacity 0.6s ease;
+    }
+    .seq-loader.hidden { opacity: 0; pointer-events: none; }
+    .seq-loader__ring {
+      width: 40px; height: 40px;
+      border: 2px solid rgba(151,160,169,0.2);
+      border-top-color: rgba(151,160,169,0.7);
+      border-radius: 50%;
+      animation: seqSpin 0.9s linear infinite;
+    }
+    @keyframes seqSpin { to { transform: rotate(360deg); } }
+
+    .seq-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .seq-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem clamp(2rem, 8vw, 7rem);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.25rem, 5.5vw, 5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: #fff;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      letter-spacing: -0.01em;
+    }
+    .seq-text em { font-style: italic; color: #D5D8DB; }
+    .seq-text--left { align-items: flex-start; text-align: left; }
+    .seq-text--right { align-items: flex-end; text-align: right; }
+    .seq-text--center { align-items: center; text-align: center; }
+    .seq-text--cta { gap: 2.5rem; pointer-events: auto; }
+    .seq-text.visible { opacity: 1; }
+
+    .seq-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #0D2845;
+      background: #D5D8DB;
+      padding: 0.9rem 1.75rem;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .seq-cta-btn:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+  </style>
+
+  <script>
+    (function () {
+      const TOTAL_FRAMES = 26;
+      const canvas = document.getElementById('seqCanvas');
+      const ctx = canvas.getContext('2d');
+      const loader = document.getElementById('seqLoader');
+      const section = document.getElementById('scroll-sequence');
+      const texts = [
+        document.getElementById('seqText0'),
+        document.getElementById('seqText1'),
+        document.getElementById('seqText2'),
+        document.getElementById('seqText3'),
+      ];
+      // Text appears at these scroll progress thresholds (0–1)
+      const TEXT_WINDOWS = [
+        { start: 0.0, end: 0.22 },
+        { start: 0.25, end: 0.47 },
+        { start: 0.5,  end: 0.72 },
+        { start: 0.77, end: 1.0  },
+      ];
+
+      const images = [];
+      let loadedCount = 0;
+      let ready = false;
+      let currentFrame = 0;
+      let rafPending = false;
+
+      function pad(n) { return String(n).padStart(3, '0'); }
+
+      function resize() {
+        canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+        canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+        drawFrame(currentFrame);
+      }
+
+      function drawFrame(idx) {
+        if (!ready || !images[idx]) return;
+        const img = images[idx];
+        const cw = canvas.width, ch = canvas.height;
+        const iw = img.naturalWidth, ih = img.naturalHeight;
+        const scale = Math.min(cw / iw, ch / ih);
+        const dx = (cw - iw * scale) / 2;
+        const dy = (ch - ih * scale) / 2;
+        ctx.clearRect(0, 0, cw, ch);
+        ctx.drawImage(img, dx, dy, iw * scale, ih * scale);
+      }
+
+      function onScroll() {
+        if (!ready) return;
+        const rect = section.getBoundingClientRect();
+        const sectionH = section.offsetHeight - window.innerHeight;
+        const scrolled = Math.max(0, -rect.top);
+        const progress = Math.min(1, scrolled / sectionH);
+        const frameIdx = Math.min(TOTAL_FRAMES - 1, Math.floor(progress * TOTAL_FRAMES));
+
+        if (frameIdx !== currentFrame) {
+          currentFrame = frameIdx;
+          if (!rafPending) {
+            rafPending = true;
+            requestAnimationFrame(() => { drawFrame(currentFrame); rafPending = false; });
+          }
+        }
+
+        texts.forEach((el, i) => {
+          const w = TEXT_WINDOWS[i];
+          const visible = progress >= w.start && progress <= w.end;
+          el.classList.toggle('visible', visible);
+        });
+      }
+
+      // Preload all frames
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        img.src = './assets/scroll/ezgif-frame-' + pad(i) + '.jpg';
+        img.onload = function () {
+          loadedCount++;
+          if (loadedCount === TOTAL_FRAMES) {
+            ready = true;
+            resize();
+            loader.classList.add('hidden');
+            onScroll();
+          }
+        };
+        img.onerror = function () {
+          loadedCount++;
+          if (loadedCount === TOTAL_FRAMES) {
+            ready = true;
+            resize();
+            loader.classList.add('hidden');
+            onScroll();
+          }
+        };
+        images[i - 1] = img;
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', resize);
+      resize();
+    })();
+  </script>
+
   <!-- ── NAV ──────────────────────────────────────────── -->
   <nav class="nav" id="nav">
     <div class="nav__inner">
