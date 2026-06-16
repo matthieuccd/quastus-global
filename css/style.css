@@ -395,6 +395,74 @@ ul { list-style: none; }
   color: var(--silver);
 }
 
+/* ── ABOUT PHOTO ──────────────────────────────────────── */
+.about__bio-wrap {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+.about__bio-text { flex: 1; }
+.about__photo-wrap {
+  flex-shrink: 0;
+  width: 280px;
+}
+.about__photo-img {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 6px;
+}
+
+/* ── TRACK RECORD ─────────────────────────────────────── */
+.track-record__header { margin-bottom: clamp(3rem, 6vw, 5rem); }
+.track-record__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5px;
+}
+.tr-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(151,160,169,0.12);
+  padding: clamp(1.75rem, 3.5vw, 2.75rem);
+  transition: background 0.3s;
+}
+.tr-card:hover { background: rgba(255,255,255,0.065); }
+.tr-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.75rem;
+}
+.tr-card__company {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--silver-light);
+}
+.tr-card__period {
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--silver);
+}
+.tr-card__title {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.875rem;
+  line-height: 1.25;
+}
+.tr-card__text {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--silver);
+}
+
 /* ── SERVICES ─────────────────────────────────────────── */
 .services__header { margin-bottom: clamp(3rem, 6vw, 5rem); }
 .services__grid {
@@ -651,7 +719,9 @@ ul { list-style: none; }
 @media (max-width: 900px) {
   .about__grid { grid-template-columns: 1fr; }
   .about__left { position: static; }
+  .about__photo-wrap { width: 220px; }
   .services__grid { grid-template-columns: 1fr; }
+  .track-record__grid { grid-template-columns: 1fr 1fr; }
   .clients__grid { grid-template-columns: 1fr; }
   .contact__grid { grid-template-columns: 1fr; }
   .process__steps { grid-template-columns: 1fr; }
@@ -661,7 +731,10 @@ ul { list-style: none; }
   .hide-mobile { display: none; }
   .nav__links { gap: 1rem; }
   .nav__link { display: none; }
+  .about__bio-wrap { flex-direction: column; }
+  .about__photo-wrap { width: 100%; max-width: 340px; }
   .about__stats { flex-direction: column; gap: 1.5rem; }
+  .track-record__grid { grid-template-columns: 1fr; }
   .hero__headline { font-size: clamp(3rem, 13vw, 5rem); }
   .footer__inner { flex-direction: column; align-items: flex-start; }
   .footer__meta { margin-left: 0; flex-direction: column; gap: 0.5rem; }
