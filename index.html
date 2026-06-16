@@ -489,7 +489,7 @@
         img.src = './assets/scroll/ezgif-frame-' + num + '.jpg?v=' + ts;
         img.onload = img.onerror = function() {
           loadedCount++;
-          if (loadedCount === totalFrames) {
+          if (loadedCount === 1) {
             allLoaded = true;
             spinner.style.display = 'none';
             resizeCanvas();
