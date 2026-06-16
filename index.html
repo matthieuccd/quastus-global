@@ -132,9 +132,10 @@
       justify-content: center;
     }
     #scroll-canvas {
-      max-width: 100%;
-      max-height: 100vh;
-      object-fit: contain;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
     }
     .scroll-sequence__text {
       position: absolute;
@@ -440,40 +441,61 @@
       const frames = [];
       let loadedCount = 0;
       let allLoaded = false;
+      let currentIndex = 0;
 
       const spinner = document.createElement('div');
-      spinner.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:Inter,sans-serif;color:#123862;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;';
+      spinner.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:Inter,sans-serif;color:#ffffff;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;z-index:10;';
       spinner.textContent = 'Loading...';
       sticky.appendChild(spinner);
 
+      function resizeCanvas() {
+        canvas.width = sticky.offsetWidth;
+        canvas.height = sticky.offsetHeight;
+        if (allLoaded) drawFrame(currentIndex);
+      }
+
+      function coverRect(img) {
+        const cw = canvas.width, ch = canvas.height;
+        const iw = img.naturalWidth, ih = img.naturalHeight;
+        const scale = Math.max(cw / iw, ch / ih);
+        const sw = iw * scale, sh = ih * scale;
+        return { sx: (cw - sw) / 2, sy: (ch - sh) / 2, sw, sh };
+      }
+
+      function drawFrame(exactIndex) {
+        currentIndex = exactIndex;
+        const lo = Math.floor(exactIndex);
+        const hi = Math.min(totalFrames - 1, lo + 1);
+        const blend = exactIndex - lo;
+        const imgLo = frames[Math.max(0, lo)];
+        const imgHi = frames[hi];
+        if (!imgLo || !imgLo.complete) return;
+        const { sx, sy, sw, sh } = coverRect(imgLo);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 1;
+        ctx.drawImage(imgLo, sx, sy, sw, sh);
+        if (blend > 0 && imgHi && imgHi.complete) {
+          const r = coverRect(imgHi);
+          ctx.globalAlpha = blend;
+          ctx.drawImage(imgHi, r.sx, r.sy, r.sw, r.sh);
+          ctx.globalAlpha = 1;
+        }
+      }
+
+      const ts = Date.now();
       for (let i = 1; i <= totalFrames; i++) {
         const img = new Image();
         const num = String(i).padStart(3, '0');
-        img.src = './assets/scroll/ezgif-frame-' + num + '.jpg?v=' + Date.now();
-        img.onload = function() {
+        img.src = './assets/scroll/ezgif-frame-' + num + '.jpg?v=' + ts;
+        img.onload = img.onerror = function() {
           loadedCount++;
           if (loadedCount === totalFrames) {
             allLoaded = true;
             spinner.style.display = 'none';
-            canvas.width = frames[0].naturalWidth;
-            canvas.height = frames[0].naturalHeight;
-            drawFrame(0);
-          }
-        };
-        img.onerror = function() {
-          loadedCount++;
-          if (loadedCount === totalFrames) {
-            allLoaded = true;
-            spinner.style.display = 'none';
+            resizeCanvas();
           }
         };
         frames.push(img);
-      }
-
-      function drawFrame(index) {
-        const i = Math.max(0, Math.min(totalFrames - 1, Math.round(index)));
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(frames[i], 0, 0);
       }
 
       const texts = [
@@ -483,24 +505,29 @@
         { el: document.getElementById('scroll-text-4'), start: 0.75, end: 1.0  },
       ];
 
+      let rafPending = false;
+      let lastProgress = 0;
+
       window.addEventListener('scroll', function() {
         if (!allLoaded || !section) return;
         const rect = section.getBoundingClientRect();
-        const scrolled = -rect.top;
         const total = section.offsetHeight - window.innerHeight;
-        const progress = Math.max(0, Math.min(1, scrolled / total));
-
-        drawFrame(progress * (totalFrames - 1));
-
+        lastProgress = Math.max(0, Math.min(1, -rect.top / total));
         texts.forEach(function(t) {
           if (!t.el) return;
-          if (progress >= t.start && progress < t.end) {
-            t.el.classList.add('visible');
-          } else {
-            t.el.classList.remove('visible');
-          }
+          t.el.classList.toggle('visible', lastProgress >= t.start && lastProgress < t.end);
         });
+        if (!rafPending) {
+          rafPending = true;
+          requestAnimationFrame(function() {
+            drawFrame(lastProgress * (totalFrames - 1));
+            rafPending = false;
+          });
+        }
       }, { passive: true });
+
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
     })();
   </script>
 </body>
