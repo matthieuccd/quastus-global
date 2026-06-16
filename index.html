@@ -3,247 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quaestus Global Solutions — Brand &amp; Growth Consultancy</title>
+  <title>Quaestus Global Solutions | Brand &amp; Growth Consultancy</title>
   <meta name="robots" content="noindex, nofollow" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <meta name="description" content="Singapore-based consultancy specialising in brand positioning and performance marketing for e-commerce, B2B SaaS and online food delivery." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png?v=2" />
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=2" />
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ── SCROLL SEQUENCE ───────────────────────────────── -->
-  <section class="scroll-sequence" id="scroll-sequence">
-    <div class="scroll-sequence__track">
-      <canvas class="scroll-sequence__canvas" id="seqCanvas" aria-hidden="true"></canvas>
-
-      <!-- Loading spinner -->
-      <div class="seq-loader" id="seqLoader">
-        <div class="seq-loader__ring"></div>
-      </div>
-
-      <!-- Overlay text layers -->
-      <div class="seq-overlay" id="seqOverlay">
-        <div class="seq-text seq-text--center" id="seqText0">
-          Every point of contact.<br />Every conversion.
-        </div>
-        <div class="seq-text seq-text--left" id="seqText1">
-          Brand strategy<br /><em>that defines you.</em>
-        </div>
-        <div class="seq-text seq-text--right" id="seqText2">
-          Performance marketing<br /><em>that scales you.</em>
-        </div>
-        <div class="seq-text seq-text--center seq-text--cta" id="seqText3">
-          <span>Let's build something global.</span>
-          <a href="https://wa.me/4917628554554?text=Hi%20Matthieu%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20Quaestus%20Global%20Solutions."
-            target="_blank" rel="noopener noreferrer" class="seq-cta-btn">
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 0C4.477 0 0 4.373 0 9.76c0 1.71.459 3.312 1.26 4.695L0 20l5.696-1.225A10.06 10.06 0 0010 19.52c5.523 0 10-4.373 10-9.76C20 4.373 15.523 0 10 0zm5.193 13.82c-.22.603-1.293 1.153-1.773 1.217-.48.063-.48.397-3.02-.618-2.54-1.016-4.08-3.53-4.203-3.694-.123-.164-1-1.3-1-2.483 0-1.183.636-1.77.862-2.01.226-.24.494-.3.659-.3h.494c.164 0 .385-.06.603.45.22.508.74 1.776.8 1.905.06.13.1.28.02.45-.08.17-.12.274-.24.42-.123.147-.257.328-.37.44-.123.123-.25.258-.108.505.144.247.638 1.036 1.37 1.677.941.826 1.737 1.08 1.983 1.203.246.123.39.103.535-.06.144-.165.617-.713.78-.958.165-.246.33-.206.555-.124.226.082 1.43.668 1.676.79.246.123.41.185.47.288.06.103.06.6-.16 1.202z"/></svg>
-            Start a conversation
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-    .scroll-sequence {
-      height: 400vh;
-      background: #080c12;
-    }
-    .scroll-sequence__track {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      width: 100%;
-      overflow: hidden;
-      background: #080c12;
-    }
-    .scroll-sequence__canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-    .seq-loader {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      background: #080c12;
-      transition: opacity 0.6s ease;
-    }
-    .seq-loader.hidden { opacity: 0; pointer-events: none; }
-    .seq-loader__ring {
-      width: 40px; height: 40px;
-      border: 2px solid rgba(151,160,169,0.2);
-      border-top-color: rgba(151,160,169,0.7);
-      border-radius: 50%;
-      animation: seqSpin 0.9s linear infinite;
-    }
-    @keyframes seqSpin { to { transform: rotate(360deg); } }
-
-    .seq-overlay {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 5;
-    }
-    .seq-text {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 3rem clamp(2rem, 8vw, 7rem);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: clamp(2.25rem, 5.5vw, 5rem);
-      font-weight: 300;
-      line-height: 1.1;
-      color: #fff;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      letter-spacing: -0.01em;
-    }
-    .seq-text em { font-style: italic; color: #D5D8DB; }
-    .seq-text--left { align-items: flex-start; text-align: left; }
-    .seq-text--right { align-items: flex-end; text-align: right; }
-    .seq-text--center { align-items: center; text-align: center; }
-    .seq-text--cta { gap: 2.5rem; pointer-events: auto; }
-    .seq-text.visible { opacity: 1; }
-
-    .seq-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #0D2845;
-      background: #D5D8DB;
-      padding: 0.9rem 1.75rem;
-      border-radius: 2px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .seq-cta-btn:hover {
-      background: #fff;
-      transform: translateY(-1px);
-    }
-  </style>
-
-  <script>
-    (function () {
-      const TOTAL_FRAMES = 26;
-      const canvas = document.getElementById('seqCanvas');
-      const ctx = canvas.getContext('2d');
-      const loader = document.getElementById('seqLoader');
-      const section = document.getElementById('scroll-sequence');
-      const texts = [
-        document.getElementById('seqText0'),
-        document.getElementById('seqText1'),
-        document.getElementById('seqText2'),
-        document.getElementById('seqText3'),
-      ];
-      // Text appears at these scroll progress thresholds (0–1)
-      const TEXT_WINDOWS = [
-        { start: 0.0, end: 0.22 },
-        { start: 0.25, end: 0.47 },
-        { start: 0.5,  end: 0.72 },
-        { start: 0.77, end: 1.0  },
-      ];
-
-      const images = [];
-      let loadedCount = 0;
-      let ready = false;
-      let currentFrame = 0;
-      let rafPending = false;
-
-      function pad(n) { return String(n).padStart(3, '0'); }
-
-      function resize() {
-        canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-        canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-        drawFrame(currentFrame);
-      }
-
-      function drawFrame(idx) {
-        if (!ready || !images[idx]) return;
-        const img = images[idx];
-        const cw = canvas.width, ch = canvas.height;
-        const iw = img.naturalWidth, ih = img.naturalHeight;
-        const scale = Math.min(cw / iw, ch / ih);
-        const dx = (cw - iw * scale) / 2;
-        const dy = (ch - ih * scale) / 2;
-        ctx.clearRect(0, 0, cw, ch);
-        ctx.drawImage(img, dx, dy, iw * scale, ih * scale);
-      }
-
-      function onScroll() {
-        if (!ready) return;
-        const rect = section.getBoundingClientRect();
-        const sectionH = section.offsetHeight - window.innerHeight;
-        const scrolled = Math.max(0, -rect.top);
-        const progress = Math.min(1, scrolled / sectionH);
-        const frameIdx = Math.min(TOTAL_FRAMES - 1, Math.floor(progress * TOTAL_FRAMES));
-
-        if (frameIdx !== currentFrame) {
-          currentFrame = frameIdx;
-          if (!rafPending) {
-            rafPending = true;
-            requestAnimationFrame(() => { drawFrame(currentFrame); rafPending = false; });
-          }
-        }
-
-        texts.forEach((el, i) => {
-          const w = TEXT_WINDOWS[i];
-          const visible = progress >= w.start && progress <= w.end;
-          el.classList.toggle('visible', visible);
-        });
-      }
-
-      // Preload all frames
-      for (let i = 1; i <= TOTAL_FRAMES; i++) {
-        const img = new Image();
-        img.src = './assets/scroll/ezgif-frame-' + pad(i) + '.jpg';
-        img.onload = function () {
-          loadedCount++;
-          if (loadedCount === TOTAL_FRAMES) {
-            ready = true;
-            resize();
-            loader.classList.add('hidden');
-            onScroll();
-          }
-        };
-        img.onerror = function () {
-          loadedCount++;
-          if (loadedCount === TOTAL_FRAMES) {
-            ready = true;
-            resize();
-            loader.classList.add('hidden');
-            onScroll();
-          }
-        };
-        images[i - 1] = img;
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', resize);
-      resize();
-    })();
-  </script>
-
   <!-- ── NAV ──────────────────────────────────────────── -->
   <nav class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#" class="nav__logo">
-        <img src="./assets/logo.png" alt="Quaestus Global Solutions" class="nav__logo-img" />
+      <a href="#" class="nav__logo" style="display: inline-flex; align-items: center;">
+        <img src="./assets/logo.png" style="height: 88px; width: auto; display: block;" alt="Quaestus Global Solutions" />
       </a>
       <div class="nav__links">
         <a href="#services" class="nav__link">Services</a>
@@ -267,7 +47,7 @@
       <div class="hero__rule reveal"></div>
       <p class="hero__sub reveal">
         Performance marketing and brand positioning for businesses<br class="hide-mobile" />
-        with global ambitions — built in Singapore.
+        with global ambitions, built in Singapore.
       </p>
       <div class="hero__actions reveal">
         <a href="#services" class="btn btn--outline">View services</a>
@@ -308,21 +88,12 @@
           <h2 class="section-title reveal">
             International<br />experience,<br /><em>local precision.</em>
           </h2>
-          <div class="about__logo-block reveal">
-            <img src="./assets/logo.png" alt="Quaestus Global Solutions" class="about__logo" />
-          </div>
         </div>
         <div class="about__right">
-          <div class="about__bio-wrap">
-            <div class="about__bio-text">
-              <p class="about__body reveal">
-                Quaestus Global Solutions is led by <strong>Matthieu Tissot</strong>, a French marketing executive with 15 years of international experience across Europe, Asia and Southeast Asia. From scaling Delivery Hero across 25 countries with an 8-figure TV budget, to building ClickClickDrive from zero to 2.5 million organic visitors and 30% market share — Matthieu brings operator-level expertise that most consultants simply don't have. He has worked with brands including Trivago, Spotify, Panasonic, Volkswagen, Allianz, Shell, Burger King, McDonald's, Coca-Cola and Unicef across Berlin, Jakarta, Singapore and beyond.
-              </p>
-            </div>
-            <div class="about__photo-wrap reveal">
-              <img src="./assets/matthieu.jpeg" alt="Matthieu Tissot" class="about__photo-img" />
-            </div>
-          </div>
+          <img src="./assets/matthieu.jpeg" alt="Matthieu Tissot" class="about__photo" />
+          <p class="about__body reveal">
+            Quaestus Global Solutions is led by <strong>Matthieu Tissot</strong>, a French marketing executive with 15 years of international experience across Europe, Asia and Southeast Asia. From scaling Delivery Hero across 25 countries with an 8-figure TV budget, to building ClickClickDrive from zero to 2.5 million organic visitors and 30% market share. Matthieu brings operator-level expertise that most consultants simply don't have. He has worked with brands including Trivago, Spotify, Panasonic, Volkswagen, Allianz, Shell, Burger King, McDonald's, Coca-Cola and Unicef across Berlin, Jakarta, Singapore and beyond.
+          </p>
           <div class="about__stats reveal">
             <div class="stat">
               <span class="stat__num">15+</span>
@@ -338,6 +109,78 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCROLL SEQUENCE ───────────────────────────────── -->
+  <style>
+    .scroll-sequence {
+      position: relative;
+      height: 400vh;
+      background: #ffffff;
+    }
+    .scroll-sequence__sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #scroll-canvas {
+      max-width: 100%;
+      max-height: 100vh;
+      object-fit: contain;
+    }
+    .scroll-sequence__text {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      text-align: center;
+      padding: 2rem;
+      pointer-events: none;
+      width: 100%;
+    }
+    .scroll-sequence__text.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .scroll-sequence__text h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 300;
+      color: #ffffff;
+      line-height: 1.1;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    }
+    .scroll-sequence__text h2 em {
+      font-style: italic;
+      color: #D5D8DB;
+    }
+    .scroll-sequence__text .btn {
+      margin-top: 2rem;
+    }
+  </style>
+
+  <section class="scroll-sequence">
+    <div class="scroll-sequence__sticky">
+      <canvas id="scroll-canvas"></canvas>
+      <div class="scroll-sequence__text" id="scroll-text-1">
+        <h2>Every point of contact.<br/><em>Every conversion.</em></h2>
+      </div>
+      <div class="scroll-sequence__text" id="scroll-text-2">
+        <h2>Brand strategy<br/><em>that defines you.</em></h2>
+      </div>
+      <div class="scroll-sequence__text" id="scroll-text-3">
+        <h2>Performance marketing<br/><em>that scales you.</em></h2>
+      </div>
+      <div class="scroll-sequence__text" id="scroll-text-4">
+        <h2>Ready to grow?</h2>
+        <a href="https://wa.me/4917628554554?text=Hi%20Matthieu%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20Quaestus%20Global%20Solutions." target="_blank" rel="noopener noreferrer" class="btn btn--primary">Start a conversation</a>
       </div>
     </div>
   </section>
@@ -412,7 +255,7 @@
           <div class="service-card__body">
             <h3 class="service-card__title">Brand Positioning</h3>
             <p class="service-card__text">
-              Clarifying who you are, who you're for, and why it matters — so every channel speaks with one coherent voice. We work on messaging architecture, competitive differentiation, and brand narrative.
+              Clarifying who you are, who you're for, and why it matters, so every channel speaks with one coherent voice. We work on messaging architecture, competitive differentiation, and brand narrative.
             </p>
             <ul class="service-card__tags">
               <li>Messaging strategy</li>
@@ -432,7 +275,7 @@
           <div class="service-card__body">
             <h3 class="service-card__title">Performance Marketing</h3>
             <p class="service-card__text">
-              Paid acquisition across the platforms where your customers spend time. We build and manage campaigns with creative strategy at the centre — because great targeting only works with great creative.
+              Paid acquisition across the platforms where your customers spend time. We build and manage campaigns with creative strategy at the centre, because great targeting only works with great creative.
             </p>
             <ul class="service-card__tags">
               <li>TikTok Ads</li>
@@ -462,7 +305,7 @@
             </svg>
           </div>
           <h3 class="client-tile__title">E-commerce</h3>
-          <p class="client-tile__text">From DTC fashion to marketplace sellers — we know the funnel, the unit economics, and the creative formats that convert at scale.</p>
+          <p class="client-tile__text">From DTC fashion to marketplace sellers. We know the funnel, the unit economics, and the creative formats that convert at scale.</p>
         </div>
 
         <div class="client-tile reveal">
@@ -508,7 +351,7 @@
           <div class="process__step-marker"><span>02</span></div>
           <div class="process__step-content">
             <h3 class="process__step-tag">Strategy</h3>
-            <p class="process__step-text">A clear brief on where you should play and how you should win — delivered as a concise strategic document, not a 60-slide deck.</p>
+            <p class="process__step-text">A clear brief on where you should play and how you should win, delivered as a concise strategic document, not a 60-slide deck.</p>
           </div>
         </div>
         <div class="process__step reveal">
@@ -529,7 +372,7 @@
         <div class="contact__left">
           <p class="section-label section-label--light reveal">Contact</p>
           <h2 class="section-title section-title--light reveal">Ready to<br /><em>grow?</em></h2>
-          <p class="contact__sub reveal">Send us a message on WhatsApp — we respond within one business day.</p>
+          <p class="contact__sub reveal">Send us a message on WhatsApp. We respond within one business day.</p>
           <a href="https://wa.me/4917628554554?text=Hi%20Matthieu%2C%20I%27d%20like%20to%20discuss%20a%20project%20with%20Quaestus%20Global%20Solutions."
             target="_blank" rel="noopener noreferrer"
             class="btn btn--silver btn--lg reveal">
@@ -541,8 +384,8 @@
         </div>
         <div class="contact__right reveal">
           <div class="contact__card">
-            <div class="contact__card-logo">
-              <img src="./assets/logo.png" alt="Quaestus Global Solutions" />
+            <div class="contact__card-logo" style="background: white; padding: 12px; border-radius: 4px; display: inline-block; margin-bottom: 2rem;">
+              <img src="./assets/logo.png" style="height: 56px; width: auto; display: block;" alt="Quaestus Global Solutions" />
             </div>
             <div class="contact__detail">
               <span class="contact__detail-label">Address</span>
@@ -585,5 +428,80 @@
   </a>
 
   <script src="js/main.js"></script>
+  <script>
+    (function() {
+      const canvas = document.getElementById('scroll-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const section = document.querySelector('.scroll-sequence');
+      const sticky = document.querySelector('.scroll-sequence__sticky');
+
+      const totalFrames = 26;
+      const frames = [];
+      let loadedCount = 0;
+      let allLoaded = false;
+
+      const spinner = document.createElement('div');
+      spinner.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:Inter,sans-serif;color:#123862;font-size:0.9rem;letter-spacing:0.1em;text-transform:uppercase;';
+      spinner.textContent = 'Loading...';
+      sticky.appendChild(spinner);
+
+      for (let i = 1; i <= totalFrames; i++) {
+        const img = new Image();
+        const num = String(i).padStart(3, '0');
+        img.src = './assets/scroll/ezgif-frame-' + num + '.jpg?v=' + Date.now();
+        img.onload = function() {
+          loadedCount++;
+          if (loadedCount === totalFrames) {
+            allLoaded = true;
+            spinner.style.display = 'none';
+            canvas.width = frames[0].naturalWidth;
+            canvas.height = frames[0].naturalHeight;
+            drawFrame(0);
+          }
+        };
+        img.onerror = function() {
+          loadedCount++;
+          if (loadedCount === totalFrames) {
+            allLoaded = true;
+            spinner.style.display = 'none';
+          }
+        };
+        frames.push(img);
+      }
+
+      function drawFrame(index) {
+        const i = Math.max(0, Math.min(totalFrames - 1, Math.round(index)));
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(frames[i], 0, 0);
+      }
+
+      const texts = [
+        { el: document.getElementById('scroll-text-1'), start: 0,    end: 0.25 },
+        { el: document.getElementById('scroll-text-2'), start: 0.25, end: 0.5  },
+        { el: document.getElementById('scroll-text-3'), start: 0.5,  end: 0.75 },
+        { el: document.getElementById('scroll-text-4'), start: 0.75, end: 1.0  },
+      ];
+
+      window.addEventListener('scroll', function() {
+        if (!allLoaded || !section) return;
+        const rect = section.getBoundingClientRect();
+        const scrolled = -rect.top;
+        const total = section.offsetHeight - window.innerHeight;
+        const progress = Math.max(0, Math.min(1, scrolled / total));
+
+        drawFrame(progress * (totalFrames - 1));
+
+        texts.forEach(function(t) {
+          if (!t.el) return;
+          if (progress >= t.start && progress < t.end) {
+            t.el.classList.add('visible');
+          } else {
+            t.el.classList.remove('visible');
+          }
+        });
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>
